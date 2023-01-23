@@ -1,10 +1,11 @@
+import { ImSearch } from 'react-icons/im';
 const Movies = () => {
   return (
     <>
       <form action="">
         <label htmlFor="">
           Search movie
-          <input type="text" />
+          <input type="text" /> <ImSearch />
         </label>
       </form>
       <p>
