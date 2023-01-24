@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => {
     fetchMovies().then(({ results }) => setMovies(results));
   }, []);
-  console.log(movies);
+  // console.log(movies);
   //   console.log(render);
   return (
     <>
@@ -16,7 +16,7 @@ const Home = () => {
         <ul>
           {movies.map(({ id, title }) => (
             <li key={id}>
-              <Link to="/:movieId">{title}</Link>{' '}
+              <Link to={`movies/${id}`}>{title}</Link>
             </li>
           ))}
         </ul>

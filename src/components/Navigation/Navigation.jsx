@@ -8,7 +8,7 @@ const Navigation = () => {
       <nav>
         <NavList>
           <NavItem>
-            <Link to="/home">
+            <Link to="/">
               <ImHome />
               Home
             </Link>
