@@ -19,3 +19,13 @@ export async function getMovieById(id) {
     return response.data;
   }
 }
+
+export async function getCastById(id) {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${KEY}&language=en-US`
+  );
+  // console.log(response);
+  if (response.status === 200) {
+    return response.data;
+  }
+}

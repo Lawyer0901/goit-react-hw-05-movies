@@ -30,9 +30,9 @@ const MovieDetail = () => {
         <p>{vote_average}</p>
         <p>{overview}</p>
       </div>
-      <Link to="/movies/:moviesId/cast">Cast</Link>
+      <Link to="cast">Cast</Link>
       <br />
-      <Link to="/movies/:moviesId/reviews">Reviews</Link>
+      <Link to="reviews">Reviews</Link>
 
       <Outlet />
     </>
