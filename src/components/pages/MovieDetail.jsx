@@ -3,7 +3,11 @@ import { getMovieById } from 'services/API';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 const MovieDetail = () => {
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
   const { moviesId } = useParams();
   // console.log(moviesId);
   const [movie, setMovie] = useState([]);
@@ -22,10 +26,14 @@ const MovieDetail = () => {
   } = movie;
   const IMG_PATH = 'https://image.tmdb.org/t/p/w500/';
   let image = IMG_PATH + backdrop_path;
+
   return (
     <>
       <div>
         <img src={image} alt={original_title} />
+        <button onClick={() => navigate(location.state?.from)} type="button">
+          go back
+        </button>
         <p>{title}</p>
         <p>{status}</p>
         <p>{vote_average}</p>

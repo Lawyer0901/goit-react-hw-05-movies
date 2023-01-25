@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom';
 import { getSearchMovie } from 'services/API';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Movies = () => {
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [events, setEvents] = useState(null);
   const keyword = searchParams.get('query');
   useEffect(() => {
-    // if (keyword === '' || keyword === null) {
-    //   return;
-    // }
+    if (keyword === '') {
+      return;
+    }
     getSearchMovie(keyword).then(setEvents);
+    getSearchMovie();
   }, [keyword]);
   if (events === null) {
     return;
@@ -36,15 +39,17 @@ const Movies = () => {
           <button type="button">Search</button>
         </label>
       </form>
-      <>
-        <ul>
-          {events.results.map(({ id, original_title }) => (
-            <li key={id}>
-              <Link to={`/movies/${id}`}>{original_title}</Link>
-            </li>
-          ))}
-        </ul>
-      </>
+
+      <ul>
+        {events.results.map(({ id, original_title }) => (
+          <li key={id}>
+            <Link to={`/movies/${id}`} state={{ from: location }}>
+              {original_title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
       <Outlet />
     </>
   );
