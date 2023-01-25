@@ -39,6 +39,17 @@ export async function getReviewById(id) {
   if (response.status === 200) {
     return response.data;
   }
-  console.log(response);
+  // console.log(response);
 }
-// https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1
+
+export async function getSearchMovie(keyword) {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`
+  );
+  // console.log(response);
+  if (response.status === 200) {
+    return response.data;
+  }
+  // console.log(response);
+}
+// https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 const Reviews = () => {
   const [reviews, setReviews] = useState(null);
   const { moviesId } = useParams();
-  console.log(moviesId);
+  // console.log(moviesId);
   useEffect(() => {
     getReviewById(moviesId).then(
       data => setReviews(data)
