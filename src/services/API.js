@@ -28,4 +28,17 @@ export async function getCastById(id) {
   if (response.status === 200) {
     return response.data;
   }
+  console.log(response);
 }
+
+export async function getReviewById(id) {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${KEY}&language=en-US&page=1`
+  );
+  // console.log(response);
+  if (response.status === 200) {
+    return response.data;
+  }
+  console.log(response);
+}
+// https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1

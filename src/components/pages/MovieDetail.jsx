@@ -10,7 +10,8 @@ const MovieDetail = () => {
   useEffect(() => {
     getMovieById(moviesId).then(data => setMovie(data));
   }, [moviesId]);
-  console.log(movie);
+  // console.log(movie);
+
   const {
     original_title,
     backdrop_path,
