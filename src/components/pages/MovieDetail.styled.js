@@ -24,3 +24,9 @@ export const Wraper = styled.div`
   flex-wrap: wrap;
   gap: 15px;
 `;
+
+export const Information = styled.span`
+color: color: ${p => p.theme.colors.text};
+  font-size: ${p => p.theme.fontSizes.m};
+  font-weight: ${p => p.theme.fontWeights.bold};
+`;

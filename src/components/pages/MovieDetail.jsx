@@ -4,7 +4,13 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Container, Image, Text, Wraper } from './MovieDetail.styled';
+import {
+  Container,
+  Image,
+  Text,
+  Wraper,
+  Information,
+} from './MovieDetail.styled';
 const MovieDetail = () => {
   const location = useLocation();
   // console.log(location);
@@ -43,10 +49,18 @@ const MovieDetail = () => {
           <Image src={backdrop_path ? image : NO_IMG} alt={original_title} />
         </div>
         <div>
-          <Text>{title}</Text>
-          <Text>{status}</Text>
-          <Text>{vote_average}</Text>
-          <Text>{overview}</Text>
+          <Text>
+            <Information>Movie title:</Information> {title}
+          </Text>
+          <Text>
+            <Information>Movie status:</Information> {status}
+          </Text>
+          <Text>
+            <Information>Rating:</Information> {vote_average}
+          </Text>
+          <Text>
+            <Information>About movie:</Information> {overview}
+          </Text>
         </div>
       </Container>
       <Container>
