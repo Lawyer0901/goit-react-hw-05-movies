@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { fetchMovies } from 'services/API';
 import { Link } from 'components/Navigation/Navigation.styled';
+import HomeFilmList from 'components/HomeFilmList/HomeFilmList';
+import { ListItem, Title } from './Home.styled';
 const Home = () => {
   //   const [render, setRender] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -11,15 +13,15 @@ const Home = () => {
   //   console.log(render);
   return (
     <>
-      <h2>Trends for week</h2>
+      <Title>Trends for week</Title>
       {movies && (
-        <ul>
+        <HomeFilmList>
           {movies.map(({ id, title }) => (
-            <li key={id}>
+            <ListItem key={id}>
               <Link to={`movies/${id}`}>{title}</Link>
-            </li>
+            </ListItem>
           ))}
-        </ul>
+        </HomeFilmList>
       )}
     </>
   );

@@ -1,6 +1,7 @@
 import { getReviewById } from 'services/API';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Wraper, ReviewsItem, ReviewsText } from './Reviews.styled';
 const Reviews = () => {
   const [reviews, setReviews] = useState(null);
   const { moviesId } = useParams();
@@ -18,15 +19,19 @@ const Reviews = () => {
   }
   console.log(reviews);
 
-  return (
-    <div>
-      {reviews.results.map(({ id, author, content }) => (
-        <li key={id}>
-          <p>{author}</p>
-          <p>{content}</p>
-        </li>
-      ))}
-    </div>
+  return reviews.results.length ? (
+    <>
+      <Wraper>
+        {reviews.results.map(({ id, author, content }) => (
+          <ReviewsItem key={id}>
+            <ReviewsText>{author}</ReviewsText>
+            <p>{content}</p>
+          </ReviewsItem>
+        ))}
+      </Wraper>
+    </>
+  ) : (
+    <p>SORRY There is no reviews!</p>
   );
 };
 

@@ -18,9 +18,11 @@ export const Link = styled(NavLink)`
   gap: 8px;
   color: ${p => p.theme.colors.primary};
   text-decoration: none;
+  transition: transform 1s ease-in-out;
 
   &:hover {
     color: ${p => p.theme.colors.accent};
+    transform: scale(1.1);
   }
   &.active {
     background-color: ${p => p.theme.colors.backgroundSecondary};

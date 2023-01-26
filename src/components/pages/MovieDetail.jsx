@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Container, Image, Text, Wraper } from './MovieDetail.styled';
 const MovieDetail = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const navigate = useNavigate();
   const { moviesId } = useParams();
   // console.log(moviesId);
@@ -26,28 +27,40 @@ const MovieDetail = () => {
   } = movie;
   const IMG_PATH = 'https://image.tmdb.org/t/p/w500/';
   let image = IMG_PATH + backdrop_path;
+  const NO_IMG =
+    'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
 
   return (
     <>
-      <div>
-        <img src={image} alt={original_title} />
-        <button onClick={() => navigate(location.state?.from)} type="button">
-          go back
-        </button>
-        <p>{title}</p>
-        <p>{status}</p>
-        <p>{vote_average}</p>
-        <p>{overview}</p>
-      </div>
-      <Link to="cast" state={location.state}>
-        Cast
-      </Link>
-      <br />
-      <Link to="reviews" state={location.state}>
-        Reviews
-      </Link>
-
-      <Outlet />
+      <Container>
+        <div>
+          <button
+            onClick={() => navigate(location.state?.from || '/')}
+            type="button"
+          >
+            go back
+          </button>
+          <Image src={backdrop_path ? image : NO_IMG} alt={original_title} />
+        </div>
+        <div>
+          <Text>{title}</Text>
+          <Text>{status}</Text>
+          <Text>{vote_average}</Text>
+          <Text>{overview}</Text>
+        </div>
+      </Container>
+      <Container>
+        <Link to="cast" state={location.state}>
+          Cast
+        </Link>
+        <br />
+        <Link to="reviews" state={location.state}>
+          Reviews
+        </Link>
+      </Container>
+      <Wraper>
+        <Outlet />
+      </Wraper>
     </>
   );
 };

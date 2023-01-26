@@ -1,15 +1,18 @@
 // import { ImSearch } from 'react-icons/im';
+import { FcCollect } from 'react-icons/fc';
 import { Outlet } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { getSearchMovie } from 'services/API';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { MovieList, MovieItemLink, MovieItem } from './Movies.styled';
 
 const Movies = () => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [events, setEvents] = useState(null);
+  const [value, setValue] = useState('');
   const keyword = searchParams.get('query');
   console.log(keyword);
   useEffect(() => {
@@ -22,10 +25,18 @@ const Movies = () => {
   if (events === null) {
     return;
   }
-  console.log(events);
+  // console.log(events);
+
+  const handleSearchMovie = e => {
+    setValue(e.target.value);
+    console.log(e.target.value);
+  };
   const handleSubmit = event => {
     event.preventDefault();
+    handleSearchMovie();
+
     const form = event.currentTarget;
+
     setSearchParams({ query: form.search.value });
     form.reset();
   };
@@ -36,20 +47,28 @@ const Movies = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Search movie
-          <input type="text" name="search" placeholder="enter movie" />
-          <button onSubmit={handleSubmit}>Search</button>
+          <input
+            value={value}
+            onChange={handleSearchMovie}
+            type="text"
+            name="search"
+            placeholder="enter movie"
+          />
+          <button onSubmit={handleSubmit}>
+            <FcCollect /> Search
+          </button>
         </label>
       </form>
 
-      <ul>
+      <MovieList>
         {events.results.map(({ id, original_title }) => (
-          <li key={id}>
-            <Link to={`/movies/${id}`} state={{ from: location }}>
+          <MovieItem key={id}>
+            <MovieItemLink to={`/movies/${id}`} state={{ from: location }}>
               {original_title}
-            </Link>
-          </li>
+            </MovieItemLink>
+          </MovieItem>
         ))}
-      </ul>
+      </MovieList>
 
       <Outlet />
     </>
