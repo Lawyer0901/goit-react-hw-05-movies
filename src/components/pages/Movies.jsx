@@ -11,6 +11,7 @@ const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [events, setEvents] = useState(null);
   const keyword = searchParams.get('query');
+  console.log(keyword);
   useEffect(() => {
     if (keyword === '') {
       return;
@@ -32,11 +33,11 @@ const Movies = () => {
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>
           Search movie
           <input type="text" name="search" placeholder="enter movie" />
-          <button type="button">Search</button>
+          <button onSubmit={handleSubmit}>Search</button>
         </label>
       </form>
 
