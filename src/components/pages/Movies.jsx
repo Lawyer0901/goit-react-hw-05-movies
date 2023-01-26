@@ -14,13 +14,13 @@ const Movies = () => {
   const [events, setEvents] = useState(null);
   const [value, setValue] = useState('');
   const keyword = searchParams.get('query');
-  console.log(keyword);
+  // console.log(keyword);
   useEffect(() => {
     if (keyword === '') {
       return;
     }
     getSearchMovie(keyword).then(setEvents);
-    getSearchMovie();
+    // getSearchMovie();
   }, [keyword]);
   if (events === null) {
     return;
@@ -29,35 +29,37 @@ const Movies = () => {
 
   const handleSearchMovie = e => {
     setValue(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
   const handleSubmit = event => {
     event.preventDefault();
-    handleSearchMovie();
+    // handleSearchMovie();
 
     const form = event.currentTarget;
+    console.log(form.query.value);
+    if (form.query.value === '' || form.search.value === null) {
+      return;
+    }
+    setSearchParams({ query: form.query.value });
 
-    setSearchParams({ query: form.search.value });
     form.reset();
   };
+
   // const IMG_PATH = 'https://image.tmdb.org/t/p/w500/';
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>
-          Search movie
-          <input
-            value={value}
-            onChange={handleSearchMovie}
-            type="text"
-            name="search"
-            placeholder="enter movie"
-          />
-          <button onSubmit={handleSubmit}>
-            <FcCollect /> Search
-          </button>
-        </label>
+        <input
+          value={value}
+          onChange={handleSearchMovie}
+          type="text"
+          name="query"
+          placeholder="enter movie"
+        />
+        <button onSubmit={handleSubmit}>
+          <FcCollect /> Search
+        </button>
       </form>
 
       <MovieList>
