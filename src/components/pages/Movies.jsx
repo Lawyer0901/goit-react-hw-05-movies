@@ -11,47 +11,50 @@ import { MovieList, MovieItemLink, MovieItem } from './Movies.styled';
 const Movies = () => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [events, setEvents] = useState(null);
-  const [value, setValue] = useState('');
-  const keyword = searchParams.get('query');
+  const [events, setEvents] = useState(false);
+  const [valueMovie, setValueMovie] = useState('');
+  const [submit, setSubmit] = useState('');
+  console.log(searchParams.get('query'));
+  // let submit  = searchParams.get('query');
   // console.log(keyword);
-  useEffect(() => {
-    if (keyword === '') {
-      return;
-    }
-    getSearchMovie(keyword).then(setEvents);
-    // getSearchMovie();
-  }, [keyword]);
-  if (events === null) {
-    return;
-  }
-  // console.log(events);
-
+  // if (events === []) {
+  //   return;
+  // }
   const handleSearchMovie = e => {
-    setValue(e.target.value);
-    // console.log(e.target.value);
+    setValueMovie(e.target.value);
+    console.log('input', e.target.value);
   };
+
   const handleSubmit = event => {
     event.preventDefault();
-    // handleSearchMovie();
-
+    // const { value } = submit;
+    setSubmit(valueMovie);
     const form = event.currentTarget;
-    console.log(form.query.value);
-    if (form.query.value === '' || form.search.value === null) {
-      return;
-    }
+    // console.log(form.query.value);
     setSearchParams({ query: form.query.value });
+    // form.reset();
 
-    form.reset();
+    // console.log('принимаю submit 2', value);
   };
 
-  // const IMG_PATH = 'https://image.tmdb.org/t/p/w500/';
+  // console.log('принимаю submit', value);
+  useEffect(() => {
+    // if (events === null) {
+    //   return;
+    // }
+    const conGetMovie = async () => {
+      const responce = await getSearchMovie(submit);
+      console.log(responce);
+      setEvents(responce);
+    };
+    conGetMovie();
+  }, [submit]);
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <input
-          value={value}
+          value={valueMovie}
           onChange={handleSearchMovie}
           type="text"
           name="query"
@@ -63,13 +66,14 @@ const Movies = () => {
       </form>
 
       <MovieList>
-        {events.results.map(({ id, original_title }) => (
-          <MovieItem key={id}>
-            <MovieItemLink to={`/movies/${id}`} state={{ from: location }}>
-              {original_title}
-            </MovieItemLink>
-          </MovieItem>
-        ))}
+        {events &&
+          events.results.map(({ id, original_title }) => (
+            <MovieItem key={id}>
+              <MovieItemLink to={`/movies/${id}`} state={{ from: location }}>
+                {original_title}
+              </MovieItemLink>
+            </MovieItem>
+          ))}
       </MovieList>
 
       <Outlet />

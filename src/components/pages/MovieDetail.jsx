@@ -13,15 +13,14 @@ import {
 } from './MovieDetail.styled';
 const MovieDetail = () => {
   const location = useLocation();
-  // console.log(location);
+
   const navigate = useNavigate();
   const { moviesId } = useParams();
-  // console.log(moviesId);
+
   const [movie, setMovie] = useState([]);
   useEffect(() => {
     getMovieById(moviesId).then(data => setMovie(data));
   }, [moviesId]);
-  // console.log(movie);
 
   const {
     original_title,
