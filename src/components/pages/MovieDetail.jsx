@@ -10,6 +10,7 @@ import {
   Text,
   Wraper,
   Information,
+  GoBackButton,
 } from './MovieDetail.styled';
 const MovieDetail = () => {
   const location = useLocation();
@@ -39,12 +40,12 @@ const MovieDetail = () => {
     <>
       <Container>
         <div>
-          <button
+          <GoBackButton
             onClick={() => navigate(location.state?.from || '/')}
             type="button"
           >
             go back
-          </button>
+          </GoBackButton>
           <Image src={backdrop_path ? image : NO_IMG} alt={original_title} />
         </div>
         <div>

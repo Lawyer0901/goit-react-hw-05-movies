@@ -6,7 +6,14 @@ import { getSearchMovie } from 'services/API';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MovieList, MovieItemLink, MovieItem } from './Movies.styled';
+import {
+  MovieList,
+  MovieItemLink,
+  MovieItem,
+  Form,
+  Input,
+  FormButton,
+} from './Movies.styled';
 
 const Movies = () => {
   const location = useLocation();
@@ -36,12 +43,12 @@ const Movies = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="query" placeholder="enter movie" />
-        <button onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
+        <Input type="text" name="query" placeholder="enter movie" />
+        <FormButton onSubmit={handleSubmit}>
           <FcCollect /> Search
-        </button>
-      </form>
+        </FormButton>
+      </Form>
 
       <MovieList>
         {movie &&
